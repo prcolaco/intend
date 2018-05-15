@@ -1,0 +1,22 @@
+#!/usr/bin/env intend
+
+use console, sys;
+
+// This is a fork function
+int new_process()
+{
+    sleep(10);
+    return 1;
+}
+
+// Let's create the new process
+pid = fork(new_process);
+
+// Wait for new process to end
+status = waitpid(pid);
+
+printf("end child with '%i' status\n", status);
+
+print("end main\n");
+exit(0);
+

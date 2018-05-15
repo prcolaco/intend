@@ -1,0 +1,13 @@
+if(SAFE_MODE) {
+	print("I am a prisoner in a tight jail!\n");
+} else {
+	print("I am a free guy! I can do whatever I want!!!\n");
+}
+
+print("\nTry to set env var 'INTEND_TEST'...\n");
+
+setenv("INTEND_TEST", "Did it");
+
+print("Result: '");
+print(getenv("INTEND_TEST"));
+print("'\n");

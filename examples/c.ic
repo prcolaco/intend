@@ -1,0 +1,53 @@
+#!/usr/local/bin/intend
+
+use console;
+
+arr = new array();
+
+dump(arr);
+
+arr = new array(
+	NULL
+);
+
+dump(arr);
+
+arr = new array(
+	NULL = NULL
+);
+
+dump(arr);
+
+arr = new array(
+	NULL,
+	"hello" + "bb",
+	"here"
+	" "
+	"you"
+);
+
+//arr[1] = "hello" + "bb";
+//arr[2] = "here"
+//" "
+//"you";
+
+dump(arr);
+
+arr = new array(
+	NULL,
+	"hello" + "bb",
+	"here" + " " + "you",
+	1 = "hello bb",
+	"abc" = "1st one",
+	"def" = "2nd one",
+	"ghi" = "3rd one"
+);
+
+// arr["abc"] = "1st one";
+// arr["def"] = "2nd one";
+// arr["ghi"] = "3rd one";
+
+dump(arr);
+
+dump(arr["def"], arr[3], arr["ggg"], arr[0]);
+

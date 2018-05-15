@@ -1,0 +1,5 @@
+INCLUDES = 
+METASOURCES = AUTO
+
+man_MANS = intend.1
+EXTRA_DIST = $(man_MANS)

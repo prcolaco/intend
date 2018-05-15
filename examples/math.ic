@@ -1,0 +1,18 @@
+// Test math module
+
+void loadmath()
+{
+	module_load("math");
+}
+
+loadmath();
+
+if(!module_is_loaded("math")) {
+	print("Error: math module not loaded!\n\n");
+	exit(1);
+}
+
+a=10.5;
+
+printf("Absolute value of %f = %i\n", a, abs(a));
+

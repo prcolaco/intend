@@ -1,0 +1,22 @@
+#!/usr/bin/env intend
+
+use console, sys, err, file;
+
+// Verify if we are root
+if(getuid() != 0) {
+    print("you are not allowed to run this daemon\n");
+    exit(1);
+}
+
+// Daemonize
+if(!daemon(true, true)) {
+    perror("daemon");
+    exit(1);
+}
+
+// Print useful information to kill this dumb daemon
+print("daemon running with pid: ", getpid(), "\n");
+
+// Do nothing until kill
+while(true) sleep(1);
+

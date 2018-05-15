@@ -1,0 +1,50 @@
+#!/usr/local/bin/intend
+
+use console;
+
+arr1 = new array(2, 4, 6, new array("str2", "str1"));
+
+arr2 = mkarray(2, 4, 6);
+
+str1 = new struct(
+	a = "test", 
+	b=2, 
+	c,
+	d = new array(1, 2, 3),
+	e
+);
+
+str2 = mkstruct("a", "test", "b", 2, "c", ());
+
+arr1[1] = "hello";
+arr2[2] = "here";
+
+printf("arr1 = (%s, %s, %s, (%s, %s))\n", arr1[0], arr1[1], arr1[2], arr1[3][0], arr1[3][1]);
+printf("arr2 = (%s, %s, %s)\n", arr2[0], arr2[1], arr2[2]);
+
+if(str1.a == "test") printf("str1 is great!!\n");
+if(str1.d[1] != 2) printf("error with array inside str1!");
+if(str2.a == "test") printf("str2 was expected to be!!\n");
+
+printf("%s\n", arr1);
+printf("%s\n", str1);
+
+cl = new struct(
+	a = 2,
+	b = "alô",
+	f = \(int i) {
+		print(i);
+	},
+	s = sizeof
+);
+
+printf("%s\n", cl.s(cl.b));
+
+void func(forced float param)
+{
+	dump(param);
+}
+
+a = 2;
+
+func(a + 3);

@@ -1,0 +1,29 @@
+use console;
+
+class a {
+
+	s;
+
+	void a() {
+		this.s = "hello \"master\"";
+	}
+
+	void write() {
+		printf("%s\n", this.s);
+	}
+}
+
+class b : a {
+
+	void b() {
+		this.s = "hello \"slave\"";
+	}
+
+}
+
+oa = new a();
+ob = new b();
+
+oa.write();
+ob.write();
+

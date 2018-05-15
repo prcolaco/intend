@@ -1,0 +1,83 @@
+.\"
+.\" (C) 2008, Pedro Reis Colaço <info@intendc.org>
+.\"
+.TH intend 1 "02 Oct 2008"
+.SH NAME
+Intend C \- scripting language interpreter
+.SH SYNOPSIS
+.BI "@prefix@/bin/intend [" " options " "]" " script " "[" " script arguments " "]"
+.SH DESCRIPTION
+The
+.B intend
+program is an interpreter for the Intend C scripting language.
+It uses the first non-option argument as the script file
+to interpret and passes all following command line arguments
+to the script.
+.P
+Option processing can be aborted by using the special option
+.BR "\-\-" .
+The next command line argument will be taken as the script
+to execute even if it matches a regular interpreter option.
+.SH OPTIONS
+.TP
+.BR "\-h" " or " "\-\-help"
+Display a short option summary.
+.TP
+.BR "\-V" " or " "\-\-version"
+Display the version number of the interpreter.
+.TP
+.BR "\-c" " or " "\-\-check"
+Perform only syntax checking. The script will be read and
+parsed by the interpreter. Syntax errors will be reported,
+but the script is not executed on a successful parse.
+.TP
+.BR "\-d" " or " "\-\-dump"
+Dump script contents on standard output. The script will
+be read an parsed by the interpreter, but not executed.
+Instead, the interpreter prints out its internal parse
+tree of the script, converted back into Intend C source
+code. Comments from the input script may be missing, and
+some language constructs may be expanded to a different form.
+
+This option is intended for debugging the interpreter
+itself, in the case that it misinterprets a script.
+.TP
+.BR "\-s" " or " "\-\-safe"
+Run the script in safe mode. Safe mode prevents the script
+from: accessing any file system resources (outside of the
+defined sandboxes), loading any module (besides the ones
+that are pre-loaded), writing to the environment or using any
+include files (outside of the defined sandboxes). All modules
+that interact with these types of resources will always
+behave similarly like the standard library.
+.TP
+.BR "\-p <name> <path>" " or " "\-\-path-ro <name> <path>"
+This option accepts the arguments <name> and <path> and will
+define a read-only named <name> sandbox in <path>. To know
+more about sandboxes please consult the Intend C manual
+.TP
+.BR "\-P <name> <path>" " or " "\-\-path-rw <name> <path>"
+This option accepts the arguments <name> and <path> and will
+define a read-write named <name> sandbox in <path>. To know
+more about sandboxes please consult the Intend C manual
+.TP
+.BR "\-l <module>" " or " "\-\-load-module <module>"
+This option accepts a <module> name argument and will add
+that module to the list of pre-loaded modules. When Intend C
+interpreter is initialized, these pre-loaded modules are
+loaded and initialized to be used by the running scripts. To
+know more about modules please consult the Intend C manual.
+.SH DIAGNOSTICS
+If a syntax or runtime error occurs, the exit status of
+the interpreter is 1 and a diagnostic message is printed
+on standard error.
+
+If no syntax or runtime error occurs, the exit status of the
+interpreter is that of the script executed. Note that some
+debugging options of the interpreter itself will preclude the
+script from running. In that case the exit status is 0.
+.SH AUTHOR
+Pedro Reis Colaço <info@intendc.org>
+
+Intend C was based on the work of Pascal Schmidt on the
+former Arena project.

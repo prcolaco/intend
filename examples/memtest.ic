@@ -1,0 +1,20 @@
+#!/usr/local/bin/intend
+
+if(!module_is_loaded("mem"))
+	module_load("mem");
+
+mem1 = malloc(1000);
+
+if(is_mem_resource(mem1))
+	print("mem allocated\n");
+else
+	print("mem not allocated\n");
+
+free(mem1);
+
+if(is_null(mem1))
+	print("mem freed\n");
+else
+	print("mem not freed\n");
+
+exit(0);

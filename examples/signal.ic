@@ -1,0 +1,30 @@
+#!/usr/bin/env intend
+
+use console, sys;
+
+// Control
+done = false;
+
+// This is a signal function
+void sig_handler(int sig)
+{
+    psignal(sig, "signal.ic");
+    done = true;
+    global("done");
+}
+
+// Let's register a signal handler
+if(!signal(sig_handler)) {
+    print("error registering signal handler\n");
+    exit(1);
+}
+
+// Wait for signals while not done
+while(!done) sleep(1);
+
+// Clean signal handler
+signal(SIG_DFL);
+
+// The end
+print("end of program\n");
+exit(0);

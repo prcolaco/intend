@@ -1,0 +1,44 @@
+#!/usr/bin/env intend
+
+// Example to cat files to console
+
+use console, err, file;
+
+void cat(string f)
+{
+    if (f == "-") {
+        fp = stdin;
+    } else {
+        file = fileread(f); // This one-line shot reads the entire file :D
+        if (file == NULL) {
+            err = strerror(errno()); // This get the OS error string
+            throw(err);
+        }
+    }
+
+    if (fp != NULL) {
+        file = "";
+        for (;;) {
+            s = fgets(fp);
+            if (s == NULL)
+                break;
+            file += s;
+        }
+    }
+
+    print(file);
+}
+
+if (argc < 2)
+{
+    cat("-");
+} else
+{
+    for (i = 1 ; i < argc ; i++) {
+        try {
+            cat(argv[i]);
+        } catch (e) {
+            print(e, "\n"); // Error reporting
+        }
+    }
+}

@@ -1,0 +1,36 @@
+// Intend C Class for preg regular expressions module
+
+
+// regexp class
+class regexp {
+	regex;		// compiled regular expression
+	result;		// return code from regexec
+
+	// regcomp the pattern and store it in regex
+	void regexp(string pattern)
+	{
+		// size of regex_t structure (worst case for LP64)
+		REGEX_T_SIZE = 24;
+		
+		module_load("preg");
+		if (!module_is_loaded("preg")) {
+			throw "preg module not loaded";
+		}
+		this.regex = preg_compile(pattern, PREG_EXTENDED);
+		if (is_void(this.regex)) {
+			throw "error in regular expression";
+		}
+	}
+
+	// search the string `s' for the compiled regular expression
+	array regexec(string s, int flags)
+	{
+		return preg_exec(this.regex, s, flags);
+	}
+
+	// see if string `s' has matches for the compiled regular expression
+	bool regmatch(string s, int flags)
+	{
+		return preg_match(this.regex, s, flags);
+	}
+}

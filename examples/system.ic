@@ -1,0 +1,27 @@
+#!/usr/bin/env intend
+
+use console, sys;
+
+input = "1st line
+2nd line
+3rd line
+4th line
+5th line
+6th line
+7th line
+";
+
+//tail -n 3 from variable
+system("tail", new array("-n", 3), input);
+
+//egrep "^4" from variable to variable
+system("egrep", new array("^4"), input, &output);
+
+print(output);
+
+//grep -rHn "limits.h" /usr/include
+system("grep", new array("-rHn", "limits.h", "/usr/include"), NULL, &output, &errors);
+
+if(errors == "")
+    print(output);
+

@@ -1,0 +1,36 @@
+#!/usr/bin/env intend
+
+use console, file, shell;
+
+// Read passwd file
+passwd = fileread("/etc/passwd");
+
+// We use the optional NULL argument to ignore the stderr instead of
+// displaying errors on console. If we need to see the errors, just
+// pass an &err reference and the errors will be stored in err variable
+// as a regular string. :D
+
+// Print the root line
+rootline = grep("root", passwd, NULL);
+print(rootline);
+
+// Print the nobody line with regular expression
+nobodyline = egrep("^nobody", passwd, NULL);
+print(nobodyline);
+
+// Print the root shell
+awkpgm = '
+BEGIN  { FS = ":" }
+/root/ { print $7 }
+';
+rootshell = awk(awkpgm, passwd, NULL);
+print(rootshell);
+
+// Change the root shell to /bin/sh
+rootnewshell = sed("s/:[^:]*$/:\\/bin\\/sh/", rootline, NULL);
+print(rootnewshell);
+
+// Let's take a look at the result file
+newpasswd = sed("s/^\\(root:.*\\):[^:]*$/\\1:\\/bin\\/sh/", passwd, NULL);
+shell("less", newpasswd);
+

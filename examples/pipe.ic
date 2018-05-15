@@ -1,0 +1,23 @@
+#!/usr/bin/env intend
+
+use console, err, file;
+
+in = NULL;
+out = NULL;
+
+if(!pipe(&in, &out)) {
+	perror("pipe");
+	exit(1);
+}
+
+setbuf(in, false);
+setbuf(out, false);
+
+fwrite(out, "test\n");
+
+result = fgets(in);
+
+print(result);
+
+fclose(in);
+fclose(out);
